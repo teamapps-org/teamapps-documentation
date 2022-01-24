@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<thlogic>
+    <attr sel="page" th:replace="template-main :: mainTemplate(title='hello fragment!!', content=~{::body})"/>
+    <attr sel="example" th:insert="template-example :: examplePane(class=${class})"/>
+</thlogic>
