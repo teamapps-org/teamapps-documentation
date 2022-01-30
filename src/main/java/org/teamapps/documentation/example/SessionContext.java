@@ -111,20 +111,12 @@ public class SessionContext {
 		return sessionContext.isActive();
 	}
 
-	public void handleActivityStateChangedInternal(boolean active) {
-		sessionContext.handleActivityStateChangedInternal(active);
-	}
-
 	public boolean isDestroyed() {
 		return sessionContext.isDestroyed();
 	}
 
 	public void destroy() {
 		sessionContext.destroy();
-	}
-
-	public void handleSessionDestroyedInternal() {
-		sessionContext.handleSessionDestroyedInternal();
 	}
 
 	public Event<Void> onDestroyed() {
@@ -252,11 +244,11 @@ public class SessionContext {
 	}
 
 	public void downloadFile(String fileUrl, String downloadFileName) {
-		sessionContext.downloadFile(fileUrl, downloadFileName);
+		sessionContext.download(fileUrl, downloadFileName);
 	}
 
 	public void downloadFile(File file, String downloadFileName) {
-		sessionContext.downloadFile(file, downloadFileName);
+		sessionContext.download(file, downloadFileName);
 	}
 
 	public void registerBackgroundImage(String id, String image, String blurredImage) {
