@@ -1,0 +1,87 @@
+<page>
+    <body>
+        <h1>ComboBox</h1>
+        <p>
+            A combo box is a drop-down list selection input with search functionality. In Teamapps, the display of
+            objects in a combo box is very configurable, so it can go far beyond a simple string representation.
+        </p>
+        <h2>Creating a ComboBox instance</h2>
+        <p>
+            A combo box can be instantiated using one of its static factory methods which can either get the record data
+            from an Enum class or a List.
+        </p>
+        <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxCreateForEnum'"></example>
+        <p>
+            If not otherwise configured, a string representation of the objects is displayed in the list. In the below
+            example, this representation is the output of the toString method.
+        </p>
+        <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxCreateForList'"></example>
+        <h2>RecordToStringFunction</h2>
+        <p>
+            Internally, these factory methods implement a ComboBoxModel which has only one method, the getRecords method.
+            It matches a query string to the string representation of the records returned by recordToStringFunction
+            which can be set as a ComboBox attribute. So in the below example, the user can in particular search for an
+            animal of a certain height. The string representation is also distinct for small animals. If the
+            recordToStringFunction is not set, the toString method of the record class is the default.
+        </p>
+        <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxSetRecordToString'"></example>
+        <h2>ComboBoxModel</h2>
+        <p>
+            Instead of the above-mentioned default model which may be set upon ComboBox creation, a custom model can
+            also be set. The below example furthermore demonstrates its getRecords functionality. Since the query is
+            concatenated with the name attribute which in turn is used in the toString method of the Animal class, you
+            can see your search term appear in the record list. Give it a try, for instance by typing in "Awesome".
+        </p>
+        <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxSetModel'"></example>
+        <h2>Hierarchical data</h2>
+        <p>
+            You can also display hierarchical data in a ComboBox as the ComboBoxModel inherits i.a. the getTreeNodeInfo
+            method from the BaseTreeModel which must be overridden if the record is not already of type TreeNode. For a
+            record, this method returns the TreeNodeInfo containing in particular information about the identity of its
+            parent. Other settings are optional. By default, children of a parent node are not shown, but the sublist
+            can be expanded pressing the arrow right key when the parent record is highlighted. In case the children are
+            lazy, they are not sent to the client.
+        </p>
+        <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxTree'"></example>
+        <h2>Templates and PropertyExtractor</h2>
+        <h3>BaseTemplate</h3>
+        <p>
+            The representation of records in a ComboBox is even more configurable considering that we have displayed the
+            entries only as strings so far. Teamapps offers numerous templates that serve as placeholders for properties
+            that are displayed in a defined way. The BaseTemplate Enum class comprises a set of default templates that
+            are based on the GridTemplate(...). You can see that the icon and
+            the description attributes of the Animal objects are now shown in the drop-down list. This only happens
+            because those attributes (coincidentally) match the corresponding property names of the Template. You can find
+            out about a template's property names from its getPropertyNames method which must be implemented when using the
+            Template interface. For instance the below BaseTemplate.LIST_ITEM_LARGE_ICON_TWO_LINES has this list of
+            property names: [icon, image, caption, description, badge, ariaLabel, title].
+        </p>
+        <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxBaseTemplate'"></example>
+        <h3>PropertyExtractor</h3>
+        <p>
+            Although you could just adopt the attribute names of your record class to the property names of the template
+            you want to use it with, this should not be a requirement in the choice of attribute names. Therefore, there
+            is a PropertyExtractor available to map the template's property names to object specific information.
+            Note: in the example below, the title occurs in the mouseover popup.
+        </p>
+        <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxPropertyProvider'"></example>
+        <h3>MustacheTemplate</h3>
+        <p>
+            The MustacheTemplate is instantiated with a html string that the property names are extracted from. This
+            is done by applying a regular expression that splits the html string at curly braces. In the below example,
+            the property names color, iconSize, icon and caption are thus extracted. At the same time, the html string
+            also defines the way the properties of the records are displayed in the ComboBox.
+        </p>
+        <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxMustacheTemplate'"></example>
+        <h3>TemplateDecider</h3>
+        <p>
+            It is possible to set different templates for different records. For that purpose, you can set a general
+            TemplateDecider, but you can also further distinguish between the records in the drop-down list and the
+            record selected by the user which is demonstrated below.
+        </p>
+        <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxTemplateDecider'"></example>
+
+
+
+    </body>
+</page>
