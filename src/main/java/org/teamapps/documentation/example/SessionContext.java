@@ -9,6 +9,7 @@ import org.teamapps.icons.Icon;
 import org.teamapps.icons.SessionIconProvider;
 import org.teamapps.uisession.ClientBackPressureInfo;
 import org.teamapps.uisession.QualifiedUiSessionId;
+import org.teamapps.uisession.UiSessionListener;
 import org.teamapps.ux.component.ClientObject;
 import org.teamapps.ux.component.Component;
 import org.teamapps.ux.component.animation.EntranceAnimation;
@@ -113,6 +114,15 @@ public class SessionContext {
 
 	public boolean isDestroyed() {
 		return sessionContext.isDestroyed();
+	}
+
+
+	public void setName(String name) {
+		sessionContext.setName(name);
+	}
+
+	public String getName() {
+		return sessionContext.getName();
 	}
 
 	public void destroy() {
@@ -243,12 +253,16 @@ public class SessionContext {
 		sessionContext.showWindow(window, animationDuration);
 	}
 
-	public void downloadFile(String fileUrl, String downloadFileName) {
+	public void download(String fileUrl, String downloadFileName) {
 		sessionContext.download(fileUrl, downloadFileName);
 	}
 
-	public void downloadFile(File file, String downloadFileName) {
+	public void download(File file, String downloadFileName) {
 		sessionContext.download(file, downloadFileName);
+	}
+
+	public void download(Resource resource, String downloadFileName) {
+		sessionContext.download(resource, downloadFileName);
 	}
 
 	public void registerBackgroundImage(String id, String image, String blurredImage) {
