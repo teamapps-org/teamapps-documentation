@@ -28,15 +28,15 @@ public class ComboBoxMustacheTemplate implements Example {
         animalComboBox.setPropertyExtractor(new PropertyExtractor<Animal_2>() {
             @Override
             public Object getValue(Animal_2 animal, String propertyName) {
-                return switch (propertyName) {
-                    case PROPERTY_ICON -> animal.getIcon();
-                    case PROPERTY_DESCRIPTION -> animal.getDescription();
-                    case PROPERTY_TITLE -> animal.getName();
-                    case PROPERTY_CAPTION -> animal.getSpecies().toString();
-                    case "color" -> animal.getColor().toHtmlColorString();
-                    case "iconSize" -> animal.getHeightCentimeters();
-                    default -> null;
-                };
+                switch (propertyName) {
+                    case PROPERTY_ICON: return animal.getIcon();
+                    case PROPERTY_DESCRIPTION: return animal.getDescription();
+                    case PROPERTY_TITLE: return animal.getName();
+                    case PROPERTY_CAPTION: return animal.getSpecies().toString();
+                    case "color": return animal.getColor().toHtmlColorString();
+                    case "iconSize": return animal.getHeightCentimeters();
+                    default: return null;
+                }
             }
         });
         MustacheTemplate template = new MustacheTemplate("" +

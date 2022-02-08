@@ -14,6 +14,10 @@ import static org.teamapps.ux.component.template.BaseTemplate.*;
 import static org.teamapps.ux.component.template.BaseTemplate.PROPERTY_CAPTION;
 
 public class ComboBoxPropertyProvider implements Example {
+    private static Object getValue(Animal_2 animal, String propertyName) {
+        return null;
+    }
+
     @Override
     public void onSessionStart(SessionContext sessionContext) {
         List<Animal_2> animalList = List.of(
@@ -24,13 +28,13 @@ public class ComboBoxPropertyProvider implements Example {
         animalComboBox.setPropertyExtractor(new PropertyExtractor<>() {
             @Override
             public Object getValue(Animal_2 animal, String propertyName) {
-                return switch (propertyName) {
-                    case PROPERTY_ICON -> animal.getIcon();
-                    case PROPERTY_DESCRIPTION -> animal.getDescription();
-                    case PROPERTY_TITLE -> animal.getName();
-                    case PROPERTY_CAPTION -> animal.getSpecies().toString();
-                    default -> null;
-                };
+                switch (propertyName) {
+                    case PROPERTY_ICON: return animal.getIcon();
+                    case PROPERTY_DESCRIPTION: return animal.getDescription();
+                    case PROPERTY_TITLE: return animal.getName();
+                    case PROPERTY_CAPTION: return animal.getSpecies().toString();
+                    default: return null;
+                }
             }
         });
         sessionContext.addRootComponent(animalComboBox);
