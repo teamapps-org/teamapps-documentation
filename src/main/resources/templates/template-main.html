@@ -49,9 +49,25 @@
 </head>
 <body>
 
-<th:block th:replace="${content}">
-    This page is empty...
-</th:block>
+<header>
+    <span class="header-span"> TeamApps Documentation </span>
+</header>
+
+<section>
+    <nav class="main-nav">
+        <ul>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">ComboBox</a></li>
+            <li><a href="#">SessionContext</a></li>
+        </ul>
+    </nav>
+
+    <th:block th:replace="${content}" class="content">
+        This page is empty...
+    </th:block>
+</section>
+
+
 
 <script type=text/javascript src=/js/0.944eadb004ec78610b6c.js></script>
 <script type=text/javascript src=/js/3.42488b150a1783ec4daf.js></script>
@@ -61,5 +77,9 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/vs.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
 <script>hljs.highlightAll();</script>
+
+<footer>
+    <p> Impressum, Datenschutzerklaerung ...</p>
+</footer>
 </body>
 </html>

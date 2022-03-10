@@ -4,7 +4,7 @@
 
 <div class="example">
     <div class="example-code-heading">Code:</div>
-    <pre class="example-code-container"><code class="language-java" th:utext="${exampleResolver.getSourceCode(class)}">this is an example</code></pre>
+    <pre class="example-code-container"><code class="language-java" th:text="${exampleResolver.getSourceCode(class)}">this is an example</code></pre>
     <div class="example-result-heading">Result:</div>
     <div class="example-result-container" th:id="${exampleResolver.escapeClassName(class)}" th:data-example-class-name="${class}" th:style="'height: ' + ${height} + 'px;'"></div>
 </div>
