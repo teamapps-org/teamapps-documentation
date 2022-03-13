@@ -56,8 +56,33 @@
 <section>
     <nav class="main-nav">
         <ul>
-            <li><a href="#">Events</a></li>
-            <li><a href="#">ComboBox</a></li>
+            <li><a href="EventHandling">Events</a></li>
+            <!--<li><a href="ComboBox">ComboBox</a></li>-->
+            <li class="dropdown">
+                <button class="dropbtn">ComboBox
+                    <i class="fa fa-caret-down" style="font-size:48px;color:red"></i>
+                </button>
+            <nav class="sub-nav">
+                <ul>
+                    <li><a href="ComboBox#instantiation" title="Creating a ComboBox instance">Creating a ComboBox instance</a></li>
+                    <li><a href="ComboBox#recordToStringFunction" title="RecordToStringFunction">RecordToStringFunction</a></li>
+                    <li><a href="ComboBox#ComboBoxModel" title="ComboBoxModel">ComboBoxModel</a></li>
+                    <li><a href="ComboBox#HierarchicalData" title="Hierarchical data">Hierarchical data</a></li>
+                    <li><a href="ComboBox#TemplatesAndPropertyExtractor" title="Templates and PropertyExtractor">
+                        Templates and PropertyExtractor
+                    </a>
+                        <nav class="">
+                            <ul class="">
+                                <li class=""><a href="ComboBox#BaseTemplate" title="BaseTemplate" class="">BaseTemplate</a></li>
+                                <li class=""><a href="ComboBox#PropertyExtractor" title="PropertyExtractor" class="">PropertyExtractor</a></li>
+                                <li class=""><a href="ComboBox#MustacheTemplate" title="MustacheTemplate" class="">MustacheTemplate</a></li>
+                                <li class=""><a href="ComboBox#TemplateDecider" title="TemplateDecider" class="">TemplateDecider</a></li>
+                            </ul>
+                        </nav>
+                    </li>
+                </ul>
+            </nav>
+            </li>
             <li><a href="#">SessionContext</a></li>
         </ul>
     </nav>
