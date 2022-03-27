@@ -1,0 +1,35 @@
+<page>
+    <body>
+    <h1 id="DataBinding">Data binding</h1>
+    <p>
+
+    </p>
+    <h2 id="PropertyExtractor">Property Extractor</h2>
+    <!--(Is it always used with templates?)-->
+    <p>
+        In TeamApps, templates are used to display data properties in a defined way (see Templates section). This would
+        work without data binding if we named the attributes of the Objects we want to display according to the
+        properties of the template. However, this is usually an inappropriate naming strategy. PropertyExtractors are
+        used here to map template's property names to object specific information. This mapping must be implemented in
+        this interface's getValue method. In the below example, the PropertyExtractor is used to map attributes of
+        the Animal class to the properties of a BaseTemplate which ar displayed in a ComboBox.
+    </p>
+    <example th:with="class='org.teamapps.documentation.example.databinding.PropertyExtractorExample'"></example>
+    <h2 id="PropertyInjector">Property Injector</h2>
+    <p>
+        TODO
+    </p>
+    <!--<example th:with="class='org.teamapps.documentation.example.databinding.PropertyInjectorExample'"></example>-->
+    <h2 id="BeanPropertyExtractor">Bean Property Extractor</h2>
+    <p>
+        The BeanPropertyExtractor implements the PropertyExtractor and is usually used as the default in components
+        that need a PropertyProvider.
+        - TODO: describe how it works
+    </p>
+    <h2 id="BeanPropertyInjector">Bean Property Injector</h2>
+    <p>
+        TODO
+    </p>
+    <!--<example th:with="class='org.teamapps.documentation.example.databinding.BeanPropertyInjectorExample'"></example>-->
+    </body>
+</page>
