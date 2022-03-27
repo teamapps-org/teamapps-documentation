@@ -46,51 +46,78 @@
     <link href=/css/teamapps.f9c974003eb8f9630cc7.css rel=stylesheet>
 
     <link href="/res/style.css" rel="stylesheet"/>
+    <link href="/res/bootstrap/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-
-<header>
-    <span class="header-span"> TeamApps Documentation </span>
-</header>
-
-<section>
-    <nav class="main-nav">
-        <ul>
-            <li><a href="EventHandling">Events</a></li>
-            <!--<li><a href="ComboBox">ComboBox</a></li>-->
-            <li class="dropdown">
-                <button class="dropbtn">ComboBox
-                    <i class="fa fa-caret-down" style="font-size:48px;color:red"></i>
-                </button>
-            <nav class="sub-nav">
-                <ul>
-                    <li><a href="ComboBox#instantiation" title="Creating a ComboBox instance">Creating a ComboBox instance</a></li>
-                    <li><a href="ComboBox#recordToStringFunction" title="RecordToStringFunction">RecordToStringFunction</a></li>
-                    <li><a href="ComboBox#ComboBoxModel" title="ComboBoxModel">ComboBoxModel</a></li>
-                    <li><a href="ComboBox#HierarchicalData" title="Hierarchical data">Hierarchical data</a></li>
-                    <li><a href="ComboBox#TemplatesAndPropertyExtractor" title="Templates and PropertyExtractor">
-                        Templates and PropertyExtractor
-                    </a>
-                        <nav class="">
-                            <ul class="">
-                                <li class=""><a href="ComboBox#BaseTemplate" title="BaseTemplate" class="">BaseTemplate</a></li>
-                                <li class=""><a href="ComboBox#PropertyExtractor" title="PropertyExtractor" class="">PropertyExtractor</a></li>
-                                <li class=""><a href="ComboBox#MustacheTemplate" title="MustacheTemplate" class="">MustacheTemplate</a></li>
-                                <li class=""><a href="ComboBox#TemplateDecider" title="TemplateDecider" class="">TemplateDecider</a></li>
-                            </ul>
-                        </nav>
-                    </li>
-                </ul>
+<div class="container-fluid border">
+    <div class="row">
+        <nav class="navbar navbar-expand-lg bg-light">
+            <a href="#"><img src="/res/logo.png"></a>
+            <a class="navbar-brand mx-auto " href="#">TeamApps Documentation</a>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <nav class="nav flex-column">
+                <a class="nav-link active" aria-current="page" href="#">Tutorials</a>
+                <a class="nav-link" href="#">Concepts</a>
+                <nav class="sub-nav">
+                    <a class="nav-link" href="DataBinding">Data binding</a>
+                    <nav class="sub-nav">
+                        <a class="nav-link" href="DataBinding#PropertyExtractor">Property Extractor</a>
+                        <a class="nav-link" href="DataBinding#PropertyInjector">Property Injector</a>
+                        <a class="nav-link" href="DataBinding#BeanPropertyExtractor">Bean Property Extractor</a>
+                        <a class="nav-link" href="DataBinding#BeanPropertyInjector">Bean Property Injector</a>
+                    </nav>
+                    <a class="nav-link" href="#">Event handling</a>
+                    <nav class="sub-nav">
+                        <a class="nav-link" href="#">Event Concept</a>
+                        <a class="nav-link" href="#">Examples</a>
+                    </nav>
+                    <a class="nav-link" href="#">Icons</a>
+                    <nav class="sub-nav">
+                        <a class="nav-link" href="#">Material Icons</a>
+                        <a class="nav-link" href="#">Font Awesome Icons</a>
+                        <a class="nav-link" href="#">Custom Icons</a>
+                    </nav>
+                    <a class="nav-link" href="Templates">Templates</a>
+                    <nav class="sub-nav">
+                        <a class="nav-link" href="Templates#TemplatesConcept">Template Concept</a>
+                        <a class="nav-link" href="Templates#GridTemplate">Grid Template</a>
+                        <a class="nav-link" href="Templates#">ComboBox with Template</a>
+                        <a class="nav-link" href="Templates#">Button with Template</a>
+                        <a class="nav-link" href="Templates#">Item View with Template</a>
+                        <a class="nav-link" href="Templates#">Toolbar with Template</a>
+                    </nav>
+                    <a class="nav-link" href="#">Application Development</a>
+                    <a class="nav-link" href="#">Session handling</a>
+                    <nav class="sub-nav">
+                        <a class="nav-link" href="#">Session Concept</a>
+                        <a class="nav-link" href="#">Session Context</a>
+                    </nav>
+                    <a class="nav-link" href="#">Integration Options</a>
+                    <a class="nav-link" href="#">Templates</a>
+                </nav>
+                <a class="nav-link" href="#">Components</a>
             </nav>
-            </li>
-            <li><a href="#">SessionContext</a></li>
-        </ul>
-    </nav>
+        </div>
+        <div class="col-10">
+            <th:block th:replace="${content}" class="content">
+                This page is empty...
+            </th:block>
+        </div>
+    </div>
+    <!--
+    <div class = "row">
+        <footer clas="navbar navbar-expand-lg bg-light ">
+            <p class="navbar-text"> Impressum, Datenschutzerklaerung ...</p>
+        </footer>
+    </div>
+    -->
+</div>
 
-    <th:block th:replace="${content}" class="content">
-        This page is empty...
-    </th:block>
-</section>
+
+
 
 
 
@@ -102,9 +129,8 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/vs.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
 <script>hljs.highlightAll();</script>
+<script type=text/javascript src=/res/bootstrap/js/bootstrap.bundle.js></script>
 
-<footer>
-    <p> Impressum, Datenschutzerklaerung ...</p>
-</footer>
+
 </body>
 </html>
