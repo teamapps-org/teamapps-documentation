@@ -1,8 +1,8 @@
 package org.teamapps.documentation.example.combobox;
 
-import com.vdurmont.emoji.EmojiParser;
 import org.teamapps.documentation.example.Example;
 import org.teamapps.documentation.example.SessionContext;
+import org.teamapps.icon.emoji.EmojiIcon;
 import org.teamapps.ux.component.field.combobox.ComboBox;
 import org.teamapps.ux.component.tree.TreeNodeInfo;
 import org.teamapps.ux.component.tree.TreeNodeInfoImpl;
@@ -17,12 +17,12 @@ public class ComboBoxTree implements Example {
         animalComboBox.setModel(new ComboBoxModel<>() {
             @Override
             public List<Animal> getRecords(String query) {
-                Animal sarabi = new Animal(EmojiParser.parseToUnicode(":lion:"), "Sarabi", AnimalSpecies.LION, 120);
-                Animal simba = new Animal(EmojiParser.parseToUnicode(":lion:"), "Simba", AnimalSpecies.LION, 120, sarabi);
+                Animal sarabi = new Animal(EmojiIcon.LION, "Sarabi", AnimalSpecies.LION, 120);
+                Animal simba = new Animal(EmojiIcon.LION, "Simba", AnimalSpecies.LION, 120, sarabi);
                 return List.of(sarabi, simba,
-                        new Animal(EmojiParser.parseToUnicode(":lion:"), "Kopa", AnimalSpecies.LION, 50, simba),
-                        new Animal(EmojiParser.parseToUnicode(":lion:"), "Kiara", AnimalSpecies.LION, 60, simba),
-                        new Animal(EmojiParser.parseToUnicode(":lion:"), "Kion", AnimalSpecies.LION, 70, simba));
+                        new Animal(EmojiIcon.LION, "Kopa", AnimalSpecies.LION, 50, simba),
+                        new Animal(EmojiIcon.LION, "Kiara", AnimalSpecies.LION, 60, simba),
+                        new Animal(EmojiIcon.LION, "Kion", AnimalSpecies.LION, 70, simba));
             }
             @Override
             public TreeNodeInfo getTreeNodeInfo(Animal animal) {
