@@ -25,10 +25,19 @@
     <h2 id="BeanPropertyExtractor">Bean Property Extractor</h2>
     <p>
         The BeanPropertyExtractor implements the PropertyExtractor and is usually used as the default in components
-        that need a PropertyProvider.
-        - TODO: describe how it works
-        - TODO: can be customized via addProperty method
+        that need a PropertyProvider. It's {getValue} method is based on the ValueExtractor interface whose instances
+        are record class and propertyName specific. The {extract} method to be implemented here returns a value for a
+        record. Via the {addProperty} method of the BeanPropertyExtractor, we can add s custom ValueExtractor for a
+        specific propertyName. In the below example, we pass ValueExtractors for the caption, image and badge properties.
+
+        If there is no custom ValueExtractor for a given propertyName in a BeanPropertyExtractor instance, a
+        ValueExtractor is created for the class of the record and the propertyName if a getter named according to the
+        propertyName can be found within the class (and if fallbackToFields attribute is True, it also tries to match the
+        field names of the class). Thus, in the example, description and icon of the animal class are displayed
+        automatically, since the attribute names match the propertyNames.
+
     </p>
+    <example th:with="class='org.teamapps.documentation.example.databinding.BeanPropertyExtractorExample'"></example>
     <h2 id="BeanPropertyInjector">Bean Property Injector</h2>
     <p>
         TODO
