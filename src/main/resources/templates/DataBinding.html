@@ -11,8 +11,10 @@
         work without data binding if we named the attributes of the Objects we want to display according to the
         properties of the template. However, this is usually an inappropriate naming strategy. PropertyExtractors are
         used here to map template's property names to object specific information. This mapping must be implemented in
-        this interface's getValue method. In the below example, the PropertyExtractor is used to map attributes of
-        the Animal class to the properties of a BaseTemplate which ar displayed in a ComboBox.
+        this interface's {getValue} method. In the below example, the PropertyExtractor is used to map attributes of
+        the Animal class to the properties of a BaseTemplate which ar displayed in a ComboBox. The PropertyExtractor is
+        subinterface of the PropertyProvider which can be applied in the same use cases. This interface has a similar
+        mapping function called {getValues} which returns a mapping of all propertyNames at once.
     </p>
     <example th:with="class='org.teamapps.documentation.example.databinding.PropertyExtractorExample'"></example>
     <h2 id="PropertyInjector">Property Injector</h2>
@@ -25,6 +27,7 @@
         The BeanPropertyExtractor implements the PropertyExtractor and is usually used as the default in components
         that need a PropertyProvider.
         - TODO: describe how it works
+        - TODO: can be customized via addProperty method
     </p>
     <h2 id="BeanPropertyInjector">Bean Property Injector</h2>
     <p>

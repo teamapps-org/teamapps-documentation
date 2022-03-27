@@ -5,7 +5,7 @@
             A combo box is a drop-down list selection input with search functionality. In Teamapps, the display of
             objects in a combo box is very configurable, so it can go far beyond a simple string representation.
         </p>
-        <h2 id="instantiation"><a class="" href="#instantiation" title="">Creating a ComboBox instance</a></h2>
+        <h2 id="instantiation">Creating a ComboBox instance</h2>
         <p>
             A combo box can be instantiated using one of its static factory methods which can either get the record data
             from an Enum class or a List.
@@ -16,7 +16,7 @@
             example, this representation is the output of the toString method.
         </p>
         <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxCreateForList'"></example>
-        <h2 id="recordToStringFunction">RecordToStringFunction<a class="" href="#recordToStringFunction" title="">¶</a></h2>
+        <h2 id="recordToStringFunction">RecordToStringFunction</h2>
         <p>
             Internally, these factory methods implement a ComboBoxModel which has only one method, the getRecords method.
             It matches a query string to the string representation of the records returned by recordToStringFunction
@@ -25,7 +25,7 @@
             recordToStringFunction is not set, the toString method of the record class is the default.
         </p>
         <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxSetRecordToString'"></example>
-        <h2 id="ComboBoxModel">ComboBoxModel<a class="" href="#ComboBoxModel" title="">¶</a></h2>
+        <h2 id="ComboBoxModel">ComboBoxModel</h2>
         <p>
             Instead of the above-mentioned default model which may be set upon ComboBox creation, a custom model can
             also be set. The below example furthermore demonstrates its getRecords functionality. Since the query is
@@ -33,7 +33,7 @@
             can see your search term appear in the record list. Give it a try, for instance by typing in "Awesome".
         </p>
         <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxSetModel'"></example>
-        <h2 id="HierarchicalData">Hierarchical data<a class="" href="#HierarchicalData" title="">¶</a></h2>
+        <h2 id="HierarchicalData">Hierarchical data</h2>
         <p>
             You can also display hierarchical data in a ComboBox as the ComboBoxModel inherits i.a. the getTreeNodeInfo
             method from the BaseTreeModel which must be overridden if the record is not already of type TreeNode. For a
@@ -44,7 +44,7 @@
         </p>
         <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxTree'"></example>
         <h2 id="TemplatesAndPropertyExtractor">Templates and PropertyExtractor<a class="" href="#TemplatesAndPropertyExtractor" title="">¶</a></h2>
-        <h3 id="BaseTemplate">BaseTemplate<a class="" href="#BaseTemplate" title="">¶</a></h3>
+        <h3 id="BaseTemplate">BaseTemplate</h3>
         <p>
             The representation of records in a ComboBox is even more configurable considering that we have displayed the
             entries only as strings so far. Teamapps offers numerous templates that serve as placeholders for properties
@@ -57,7 +57,7 @@
             property names: [icon, image, caption, description, badge, ariaLabel, title].
         </p>
         <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxBaseTemplate'"></example>
-        <h3 id="PropertyExtractor">PropertyExtractor<a class="" href="#PropertyExtractor" title="">¶</a></h3>
+        <h3 id="PropertyExtractor">PropertyExtractor</h3>
         <p>
             Although you could just adopt the attribute names of your record class to the property names of the template
             you want to use it with, this should not be a requirement in the choice of attribute names. Therefore, there
@@ -65,7 +65,7 @@
             Note: in the example below, the title occurs in the mouseover popup.
         </p>
         <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxPropertyProvider'"></example>
-        <h3 id="MustacheTemplate">MustacheTemplate<a class="" href="#MustacheTemplate" title="">¶</a></h3>
+        <h3 id="MustacheTemplate">MustacheTemplate</h3>
         <p>
             The MustacheTemplate is instantiated with a html string that the property names are extracted from. This
             is done by applying a regular expression that splits the html string at curly braces. In the below example,
@@ -73,7 +73,7 @@
             also defines the way the properties of the records are displayed in the ComboBox.
         </p>
         <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxMustacheTemplate'"></example>
-        <h3 id="TemplateDecider">TemplateDecider<a class="" href="#TemplateDecider" title="">¶</a></h3>
+        <h3 id="TemplateDecider">TemplateDecider</h3>
         <p>
             It is possible to set different templates for different records. For that purpose, you can set a general
             TemplateDecider, but you can also further distinguish between the records in the drop-down list and the
