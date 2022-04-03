@@ -1,4 +1,4 @@
-package org.teamapps.documentation.example.databinding;
+package org.teamapps.documentation.example.templates;
 
 import org.teamapps.common.format.Color;
 import org.teamapps.data.extract.PropertyExtractor;

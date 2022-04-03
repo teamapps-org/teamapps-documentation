@@ -1,15 +1,43 @@
 <page>
   <body>
-  <h1 id="Templates">Templates</h1>
+  <h1 id="TemplatesAndDataExtraction">Templates and Data Extraction</h1>
 
-  <h2 id="TemplatesConcept">Templates concept</h2>
+  <h2 id="GeneralConcept">General concept</h2>
   <p>
+    This section shows how any kind of object can be displayed within TeamApps UI components in a custom way.
+    To achieve this, we use Templates and data extraction tools. In the below example, the general principle is applied
+    to the simplest component, the TemplateField, where we want to display an Animal object. <br>
     Templates define how data properties are displayed on the UI. The set of properties a template is based on can be
-    accessed via the {getPropertyNames} method which every template must implement. The properties can be extracted from
-    the data using a PropertyProvider (see data binding section).
-    ...
+    accessed via the {getPropertyNames} method which every template must implement. Here, we use one of the predefined
+    BaseTemplates which are based on the GridTemplate (see section <a href="#GridTemplate">Grid Template</a>).
+    The BaseTemplate LIST_ITEM_LARGE_ICON_TWO_LINES has the propertyNames: [icon, image, caption, description, badge,
+    ariaLabel, title]. <br>
+    Data extraction tools comprise the PropertyProvider and its subinterface the PropertyExtractor. Both serve as
+    mappers of the templates propertyNames to object specific information (e.g. its attributes) we want to display.
+    Below, we implement a PropertyExtractor by defining this mapping in its {getValue} method. The PropertyProvider has
+    a similar mapping function called {getValues} which returns a mapping of all propertyNames at once. <br>
+    Note: in the example below, the title occurs in the mouseover popup.
   </p>
+  <example th:with="class='org.teamapps.documentation.example.templates.TemplateFieldExample'"></example>
+  <p>
+    If no custom PropertyProvider or Extractor is set in a component, the BeanPropertyExtractor which implements the
+    PropertyExtractor is used as a default. Its {getValue} method is based on the ValueExtractor interface whose instances
+    are record class and propertyName specific. More precisely, its {extract} method returns the respective
+    propertyName specific value for a record. <br>
+    If there is no custom ValueExtractor for a given propertyName in a BeanPropertyExtractor instance, a
+    ValueExtractor is created for the class of the record and the propertyName if a getter named according to the
+    propertyName can be found within the class (and if fallbackToFields attribute is True, it also tries to match the
+    field names of the class). Thus, in the example, description and icon of the animal class would be displayed
+    automatically, since the attribute names match the propertyNames.
+    However, a template's propertyNames are not suitable as attribute names of the Objects that should be represented.
+    In that case, we can either define a custom PropertyProvider or extractor as in the previous example or alternatively
+    add custom ValueExtractors for specific propertyNames to the BeanPropertyExtractor via the {addProperty} method. In
+    the below example, we pass ValueExtractors for the caption, image and badge properties.
 
+  <p style="color:red;">TODO: Property Injection</p>
+
+  </p>
+  <example th:with="class='org.teamapps.documentation.example.templates.BeanPropertyExtractorExample'"></example>
   <h2 id="GridTemplate">GridTemplate</h2>
   <p>
     ComboBoxWithTemplate
