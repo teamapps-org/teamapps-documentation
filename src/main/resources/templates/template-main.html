@@ -49,16 +49,21 @@
     <link href="/res/bootstrap/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-<div class="container-fluid border">
+<div class="container-fluid">
     <div class="row">
-        <nav class="navbar navbar-expand-lg bg-light">
-            <a href="#"><img src="/res/logo.png"></a>
-            <a class="navbar-brand mx-auto " href="#">TeamApps Documentation</a>
-        </nav>
+        <header class="navbar navbar-light sticky-top flex-md-nowrap p-0">
+            <!--<a href="#"><img src="/res/logo.png"></a>-->
+
+            <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">TeamApps Documentation</a>
+            <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon collapsed"></span>
+            </button>
+        </header>
     </div>
     <div class="row">
-        <div class="col-2">
-            <nav class="nav flex-column">
+
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
                 <a class="nav-link active" aria-current="page" href="#">Tutorials</a>
                 <a class="nav-link" href="#">Concepts</a>
                 <nav class="sub-nav">
@@ -80,15 +85,6 @@
                         <a class="nav-link" href="#">Font Awesome Icons</a>
                         <a class="nav-link" href="#">Custom Icons</a>
                     </nav>
-                    <a class="nav-link" href="Templates">Templates</a>
-                    <nav class="sub-nav">
-                        <a class="nav-link" href="Templates#TemplatesConcept">Template Concept</a>
-                        <a class="nav-link" href="Templates#GridTemplate">Grid Template</a>
-                        <a class="nav-link" href="Templates#ComboBoxWithTemplate">ComboBox with Template</a>
-                        <a class="nav-link" href="Templates#">Button with Template</a>
-                        <a class="nav-link" href="Templates#">Item View with Template</a>
-                        <a class="nav-link" href="Templates#">Toolbar with Template</a>
-                    </nav>
                     <a class="nav-link" href="#">Application Development</a>
                     <a class="nav-link" href="#">Session handling</a>
                     <nav class="sub-nav">
@@ -100,8 +96,8 @@
                 </nav>
                 <a class="nav-link" href="#">Components</a>
             </nav>
-        </div>
-        <div class="col-10">
+
+        <div class="col-md-9 col-lg-10 ms-sm-auto px-md-4">
             <th:block th:replace="${content}" class="content">
                 This page is empty...
             </th:block>
