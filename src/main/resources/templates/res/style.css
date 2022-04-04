@@ -1,11 +1,9 @@
 body {
-    padding: 25px;
-    /* display: grid;
-    grid-template-areas: "header header" "nav content" "footer";
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: 50px 1fr 100px;*/
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
-
 pre {
     background: white;
     border: none;
@@ -49,4 +47,40 @@ pre > code {
 
 .sub-nav {
     padding-left: 15;
+}
+
+/* tad = TeamApps Documentation*/
+.header-tad {
+    font-size:20pt !important;
+    font-weight: 500 !important;
+}
+
+.navbar-top-tad {
+    margin-bottom: 30px !important;
+}
+
+p {
+    text-align: justify;
+}
+
+.sidebar-tad {
+    padding-left: 0 !important;
+}
+
+nav > a {
+    color: black !important;
+}
+
+.nav-heading {
+    font-weight: bold !important;
+    font-size: 110% !important;
+}
+.divider {
+    width: 40px;
+    height: 4px;
+    background: #0098f1;
+    border-radius: 30px;
+    margin-left: 13px;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }

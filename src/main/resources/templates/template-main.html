@@ -51,53 +51,58 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <header class="navbar navbar-light sticky-top flex-md-nowrap p-0">
+        <header class="navbar navbar-light sticky-top flex-md-nowrap p-0 navbar-top-tad">
             <!--<a href="#"><img src="/res/logo.png"></a>-->
-
-            <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">TeamApps Documentation</a>
-            <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
-            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 header-tad" href="#">TeamApps Documentation</a>
+            <button class="navbar-toggler d-md-none collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon collapsed"></span>
             </button>
         </header>
     </div>
     <div class="row">
-
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
-                <a class="nav-link active" aria-current="page" href="#">Tutorials</a>
-                <a class="nav-link" href="#">Concepts</a>
-                <nav class="sub-nav">
-                    <a class="nav-link" href="TemplatesAndDataExtraction">Templates and Data Extraction</a>
-                    <nav class="sub-nav">
-                        <a class="nav-link" href="TemplatesAndDataExtraction#GeneralConcept">General Concept</a>
-                        <a class="nav-link" href="TemplatesAndDataExtraction#GridTemplate">Grid Template</a>
-                        <a class="nav-link" href="TemplatesAndDataExtraction#ComboBoxWithTemplate">ComboBox with Template</a>
-                        <a class="nav-link" href="TemplatesAndDataExtraction#">Button with Template</a>
-                        <a class="nav-link" href="TemplatesAndDataExtraction#">Item View with Template</a>
-                        <a class="nav-link" href="TemplatesAndDataExtraction#">Toolbar with Template</a>
-                    </nav>
-                    <a class="nav-link" href="EventHandling">Event handling</a>
-                    <nav class="sub-nav">
-                        <a class="nav-link" href="#">Event Concept</a>
-                        <a class="nav-link" href="#">Examples</a>
-                    </nav>
-                    <a class="nav-link" href="#">Icons</a>
-                    <nav class="sub-nav">
-                        <a class="nav-link" href="#">Material Icons</a>
-                        <a class="nav-link" href="#">Font Awesome Icons</a>
-                        <a class="nav-link" href="#">Custom Icons</a>
-                    </nav>
-                    <a class="nav-link" href="#">Application Development</a>
-                    <a class="nav-link" href="#">Session handling</a>
-                    <nav class="sub-nav">
-                        <a class="nav-link" href="#">Session Concept</a>
-                        <a class="nav-link" href="#">Session Context</a>
-                    </nav>
-                    <a class="nav-link" href="#">Integration Options</a>
-                </nav>
-                <a class="nav-link" href="#">Components</a>
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse sidebar-tad">
+            <a class="nav-link active nav-heading" aria-current="page" href="#">Tutorials</a>
+            <nav>
+                <a class="nav-link" href="#" style="font-style: italic;">TODO</a>
             </nav>
-
+            <div class="divider"></div>
+            <a class="nav-link nav-heading" href="#">Concepts</a>
+            <nav>
+                <a class="nav-link" href="TemplatesAndDataExtraction">Templates and Data Extraction</a>
+                <nav class="sub-nav">
+                    <a class="nav-link" href="TemplatesAndDataExtraction#GeneralConcept">General Concept</a>
+                    <a class="nav-link" href="TemplatesAndDataExtraction#GridTemplate">Grid Template</a>
+                    <a class="nav-link" href="TemplatesAndDataExtraction#ComboBoxWithTemplate">ComboBox with Template</a>
+                    <a class="nav-link" href="TemplatesAndDataExtraction#">Button with Template</a>
+                    <a class="nav-link" href="TemplatesAndDataExtraction#">Item View with Template</a>
+                    <a class="nav-link" href="TemplatesAndDataExtraction#">Toolbar with Template</a>
+                </nav>
+                <a class="nav-link" href="EventHandling">Event handling</a>
+                <nav class="sub-nav">
+                    <a class="nav-link" href="#">Event Concept</a>
+                    <a class="nav-link" href="#">Examples</a>
+                </nav>
+                <a class="nav-link" href="#">Icons</a>
+                <nav class="sub-nav">
+                    <a class="nav-link" href="#">Material Icons</a>
+                    <a class="nav-link" href="#">Font Awesome Icons</a>
+                    <a class="nav-link" href="#">Custom Icons</a>
+                </nav>
+                <a class="nav-link" href="#">Application Development</a>
+                <a class="nav-link" href="#">Session handling</a>
+                <nav class="sub-nav">
+                    <a class="nav-link" href="#">Session Concept</a>
+                    <a class="nav-link" href="#">Session Context</a>
+                </nav>
+                <a class="nav-link" href="#">Integration Options</a>
+            </nav>
+            <div class="divider"></div>
+            <a class="nav-link nav-heading" href="#">Components</a>
+            <nav>
+                <a class="nav-link" href="#" style="font-style: italic;">TODO</a>
+            </nav>
+        </nav>
         <div class="col-md-9 col-lg-10 ms-sm-auto px-md-4">
             <th:block th:replace="${content}" class="content">
                 This page is empty...
