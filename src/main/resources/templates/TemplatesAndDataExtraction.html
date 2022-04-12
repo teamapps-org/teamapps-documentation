@@ -40,11 +40,12 @@
   <example th:with="class='org.teamapps.documentation.example.templates.BeanPropertyExtractorExample'"></example>
   <h4 id="GridTemplate">GridTemplate</h4>
   <p>
-    ComboBoxWithTemplate
+    TODO
   </p>
-  <!--<example th:with="class='org.teamapps.documentation.example.databinding.GridTemplateExample'"></example>-->
+  <!--<example th:with="class='org.teamapps.documentation.example.templates.GridTemplateExample'"></example>-->
   <h4 id="ComboBoxWithTemplate">ComboBox with Template</h4>
   <p style="color:red;">TODO: refactor the following content according to the new TOC, remove unnecessary examples</p>
+  <!--<example th:with="class='org.teamapps.documentation.example.databinding.ComboboxWithTemplateExample'"></example>-->
   <p>
     A combo box is a drop-down list selection input with search functionality. In Teamapps, the display of
     objects in a combo box is very configurable, so it can go far beyond a simple string representation.
@@ -124,5 +125,27 @@
     record selected by the user which is demonstrated below.
   </p>
   <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxTemplateDecider'"></example>
+  <h4 id="ButtonWithTemplate">Button with Template</h4>
+  <p>
+    The main features to display on a button might be an icon and a caption. There are factory methods where you can
+    pass just (one of) these parameters and a BaseTemplateRecord will be created from them as the record entry of the
+    button and BaseTemplate called BUTTON will be used for display. We can also add a Component which expands upon
+    clicking the button. This is shown in the upper button example. <br>
+    Like in previously presented components, we can also display a custom record object on a button. For the arrangement
+    of the properties, we can for instance use one of the several button related predefined BaseTemplates and use set a
+    propertyProvider that maps selected information of the record onto the button (see second button example).
+    In a later section, we will see how to use buttons in a <a href="#ToolbarWithTemplate">toolbar with templates</a>.
+  </p>
+  <example th:with="class='org.teamapps.documentation.example.templates.ButtonWithTemplateExample'"></example>
+  <h4 id="ItemViewWithTemplate">ItemView with Template</h4>
+  <p>
+    TODO
+  </p>
+  <!--<example th:with="class='org.teamapps.documentation.example.templates.ItemViewWithTemplateExample'"></example>-->
+  <h4 id="ToolbarWithTemplate">Toolbar with Template</h4>
+  <p>
+    TODO
+  </p>
+  <!--<example th:with="class='org.teamapps.documentation.example.templates.ToolbarWithTemplateExample'"></example>-->
   </body>
 </page>
