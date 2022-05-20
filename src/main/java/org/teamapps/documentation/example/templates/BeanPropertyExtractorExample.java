@@ -16,7 +16,7 @@ public class BeanPropertyExtractorExample implements Example {
     @Override
     public void onSessionStart(SessionContext sessionContext) {
         Animal rabbitRecord = new Animal(EmojiIcon.RABBIT, "Judy", AnimalSpecies.RABBIT, 20, null, "Small furry mammal with long ears", Color.BEIGE);
-        TemplateField<Animal> templateField = new TemplateField(BaseTemplate.LIST_ITEM_LARGE_ICON_TWO_LINES, rabbitRecord);
+        TemplateField<Animal> templateField = new TemplateField(BaseTemplate.FILE_ITEM_FLOATING, rabbitRecord);
 
         ValueExtractor<Animal, String> captionValueExtractor = new ValueExtractor<Animal, String>() {
             @Override

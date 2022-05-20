@@ -17,7 +17,7 @@ public class TemplateFieldExample implements Example {
     @Override
     public void onSessionStart(SessionContext sessionContext) {
         Animal bearRecord = new Animal(EmojiIcon.BEAR, "Sonya", AnimalSpecies.BEAR, 150, null, "Carnivorous mammal", Color.BROWN);
-        TemplateField<Animal> templateField = new TemplateField(BaseTemplate.LIST_ITEM_LARGE_ICON_TWO_LINES, bearRecord);
+        TemplateField<Animal> templateField = new TemplateField(BaseTemplate.FILE_ITEM_FLOATING, bearRecord);
         templateField.setPropertyExtractor(new PropertyExtractor<Animal>() {
             @Override
             public Object getValue(Animal animal, String propertyName) {

@@ -10,7 +10,7 @@
     Templates define how data properties are displayed on the UI. The set of properties a template is based on can be
     accessed via the {getPropertyNames} method which every template must implement. Here, we use one of the predefined
     BaseTemplates which are based on the GridTemplate (see section <a href="#GridTemplate">Grid Template</a>).
-    The BaseTemplate LIST_ITEM_LARGE_ICON_TWO_LINES has the propertyNames: [icon, image, caption, description, badge,
+    The BaseTemplate FILE_ITEM_FLOATING has the propertyNames: [icon, image, caption, description, badge,
     ariaLabel, title]. <br>
     Data extraction tools comprise the PropertyProvider and its subinterface the PropertyExtractor. Both serve as
     mappers of the templates propertyNames to object specific information (e.g. its attributes) we want to display.
@@ -44,40 +44,22 @@
   </p>
   <!--<example th:with="class='org.teamapps.documentation.example.templates.GridTemplateExample'"></example>-->
   <h4 id="ComboBoxWithTemplate">ComboBox with Template</h4>
-  <p style="color:red;">TODO: refactor the following content according to the new TOC, remove unnecessary examples</p>
-  <!--<example th:with="class='org.teamapps.documentation.example.databinding.ComboboxWithTemplateExample'"></example>-->
-  <p>
-    A combo box is a drop-down list selection input with search functionality. In Teamapps, the display of
-    objects in a combo box is very configurable, so it can go far beyond a simple string representation.
-  </p>
-  <h5 id="instantiation">Creating a ComboBox instance</h5>
   <p>
     A combo box can be instantiated using one of its static factory methods which can either get the record data
-    from an Enum class or a List.
-  </p>
-  <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxCreateForEnum'"></example>
-  <p>
-    If not otherwise configured, a string representation of the objects is displayed in the list. In the below
-    example, this representation is the output of the toString method.
-  </p>
-  <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxCreateForList'"></example>
-  <h5 id="recordToStringFunction">RecordToStringFunction</h5>
-  <p>
+    from an Enum class or a List. If not otherwise configured, a string representation of the objects is displayed in
+    the drop down list which is by default the output of the toString method.
     Internally, these factory methods implement a ComboBoxModel which has only one method, the getRecords method.
     It matches a query string to the string representation of the records returned by recordToStringFunction
     which can be set as a ComboBox attribute. So in the below example, the user can in particular search for an
     animal of a certain height. The string representation is also distinct for small animals. If the
     recordToStringFunction is not set, the toString method of the record class is the default.
-  </p>
-  <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxSetRecordToString'"></example>
-  <h5 id="ComboBoxModel">ComboBoxModel</h5>
-  <p>
     Instead of the above-mentioned default model which may be set upon ComboBox creation, a custom model can
-    also be set. The below example furthermore demonstrates its getRecords functionality. Since the query is
-    concatenated with the name attribute which in turn is used in the toString method of the Animal class, you
-    can see your search term appear in the record list. Give it a try, for instance by typing in "Awesome".
+    also be set.
+    To display the records in a defined way, we use the BaseTemplate.LIST_ITEM_LARGE_ICON_TWO_LINES which has the
+    following list of property names: [icon, image, caption, description, badge, ariaLabel, title].
   </p>
-  <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxSetModel'"></example>
+  <example th:with="class='org.teamapps.documentation.example.templates.ComboboxWithTemplateExample'"></example>
+  <p style="color:red;">TODO: Tidy up presentation of the following ComboBox information</p>
   <h5 id="HierarchicalData">Hierarchical data</h5>
   <p>
     You can also display hierarchical data in a ComboBox as the ComboBoxModel inherits i.a. the getTreeNodeInfo
@@ -88,28 +70,6 @@
     lazy, they are not sent to the client.
   </p>
   <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxTree'"></example>
-  <h5 id="TemplatesAndPropertyExtractor">Templates and PropertyExtractor<a class="" href="#TemplatesAndPropertyExtractor" title="">¶</a></h5>
-  <h6 id="BaseTemplate">BaseTemplate</h6>
-  <p>
-    The representation of records in a ComboBox is even more configurable considering that we have displayed the
-    entries only as strings so far. Teamapps offers numerous templates that serve as placeholders for properties
-    that are displayed in a defined way. The BaseTemplate Enum class comprises a set of default templates that
-    are based on the GridTemplate(...). You can see that the icon and
-    the description attributes of the Animal objects are now shown in the drop-down list. This only happens
-    because those attributes (coincidentally) match the corresponding property names of the Template (TODO: refer to BeanPropertExtractor). You can find
-    out about a template's property names from its getPropertyNames method which must be implemented when using the
-    Template interface. For instance the below BaseTemplate.LIST_ITEM_LARGE_ICON_TWO_LINES has this list of
-    property names: [icon, image, caption, description, badge, ariaLabel, title].
-  </p>
-  <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxBaseTemplate'"></example>
-  <h6 id="PropertyExtractor">PropertyExtractor</h6>
-  <p>
-    Although you could just adopt the attribute names of your record class to the property names of the template
-    you want to use it with, this should not be a requirement in the choice of attribute names. Therefore, there
-    is a PropertyExtractor available to map the template's property names to object specific information.
-    Note: in the example below, the title occurs in the mouseover popup.
-  </p>
-  <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxPropertyProvider'"></example>
   <h6 id="MustacheTemplate">MustacheTemplate</h6>
   <p>
     The MustacheTemplate is instantiated with a html string that the property names are extracted from. This
