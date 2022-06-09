@@ -1,9 +1,11 @@
-package org.teamapps.documentation.example.combobox;
+package org.teamapps.documentation.example.templates;
 
 import org.teamapps.common.format.Color;
 import org.teamapps.data.extract.PropertyExtractor;
 import org.teamapps.documentation.example.Example;
 import org.teamapps.documentation.example.SessionContext;
+import org.teamapps.documentation.example.combobox.Animal;
+import org.teamapps.documentation.example.combobox.AnimalSpecies;
 import org.teamapps.icon.antu.AntuIcon;
 import org.teamapps.ux.component.field.combobox.ComboBox;
 import org.teamapps.ux.component.template.BaseTemplate;
@@ -14,7 +16,7 @@ import static org.teamapps.ux.component.template.BaseTemplate.*;
 import static org.teamapps.ux.component.template.BaseTemplate.PROPERTY_CAPTION;
 import org.teamapps.ux.component.template.htmltemplate.MustacheTemplate;
 
-public class ComboBoxMustacheTemplate implements Example {
+public class MustacheTemplateExample implements Example {
     @Override
     public void onSessionStart(SessionContext sessionContext) {
         List<Animal> animalList = List.of(

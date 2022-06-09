@@ -17,12 +17,10 @@ import static org.teamapps.ux.component.template.BaseTemplate.PROPERTY_CAPTION;
 public class ComboboxWithTemplateExample implements Example {
     @Override
     public void onSessionStart(SessionContext sessionContext) {
-        ComboBox<Animal> comboBox = new ComboBox<>();
-        comboBox.setModel(query -> List.of(
-                new Animal(EmojiIcon.ELEPHANT, query + "Benjamin", AnimalSpecies.ELEPHANT, 300, null, "Large grey herbivorous mammal", Color.GREY),
-                new Animal(EmojiIcon.RABBIT, query + "Judy" , AnimalSpecies.RABBIT, 20,  null, "Small furry mammal with long ears", Color.BEIGE),
-                new Animal(EmojiIcon.LION, query + "Simba", AnimalSpecies.LION, 120, null, "Large carnivorous cat", Color.YELLOW)));
-        comboBox.setRecordToStringFunction(animal -> animal.getHeightCentimeters() >= 100 ? animal.getSpecies() + " has height of " + animal.getHeightCentimeters() : animal.getSpecies() + " is tiny." );
+        ComboBox<Animal> comboBox = ComboBox.createForList(List.of(
+                new Animal(EmojiIcon.ELEPHANT, "Benjamin", AnimalSpecies.ELEPHANT, 300, null, "Large grey herbivorous mammal", Color.GREY),
+                new Animal(EmojiIcon.RABBIT, "Judy" , AnimalSpecies.RABBIT, 20,  null, "Small furry mammal with long ears", Color.BEIGE),
+                new Animal(EmojiIcon.LION, "Simba", AnimalSpecies.LION, 120, null, "Large carnivorous cat", Color.YELLOW)));
         comboBox.setTemplate(BaseTemplate.LIST_ITEM_LARGE_ICON_TWO_LINES);
         comboBox.setPropertyExtractor((Animal animal, String propertyName) ->  {
             switch (propertyName) {

@@ -43,41 +43,24 @@
     TODO
   </p>
   <!--<example th:with="class='org.teamapps.documentation.example.templates.GridTemplateExample'"></example>-->
-  <h4 id="ComboBoxWithTemplate">ComboBox with Template</h4>
-  <p>
-    A combo box can be instantiated using one of its static factory methods which can either get the record data
-    from an Enum class or a List. If not otherwise configured, a string representation of the objects is displayed in
-    the drop down list which is by default the output of the toString method.
-    Internally, these factory methods implement a ComboBoxModel which has only one method, the getRecords method.
-    It matches a query string to the string representation of the records returned by recordToStringFunction
-    which can be set as a ComboBox attribute. So in the below example, the user can in particular search for an
-    animal of a certain height. The string representation is also distinct for small animals. If the
-    recordToStringFunction is not set, the toString method of the record class is the default.
-    Instead of the above-mentioned default model which may be set upon ComboBox creation, a custom model can
-    also be set.
-    To display the records in a defined way, we use the BaseTemplate.LIST_ITEM_LARGE_ICON_TWO_LINES which has the
-    following list of property names: [icon, image, caption, description, badge, ariaLabel, title].
-  </p>
-  <example th:with="class='org.teamapps.documentation.example.templates.ComboboxWithTemplateExample'"></example>
-  <p style="color:red;">TODO: Tidy up presentation of the following ComboBox information</p>
-  <h5 id="HierarchicalData">Hierarchical data</h5>
-  <p>
-    You can also display hierarchical data in a ComboBox as the ComboBoxModel inherits i.a. the getTreeNodeInfo
-    method from the BaseTreeModel which must be overridden if the record is not already of type TreeNode. For a
-    record, this method returns the TreeNodeInfo containing in particular information about the identity of its
-    parent. Other settings are optional. By default, children of a parent node are not shown, but the sublist
-    can be expanded pressing the arrow right key when the parent record is highlighted. In case the children are
-    lazy, they are not sent to the client.
-  </p>
-  <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxTree'"></example>
-  <h6 id="MustacheTemplate">MustacheTemplate</h6>
+  <p style="color:red;">TODO: Make the following example simpler with TemplateField instead of ComboBox</p>
+  <h6 id="MustacheTemplate">Mustache Template</h6>
   <p>
     The MustacheTemplate is instantiated with a html string that the property names are extracted from. This
     is done by applying a regular expression that splits the html string at curly braces. In the below example,
     the property names color, iconSize, icon and caption are thus extracted. At the same time, the html string
     also defines the way the properties of the records are displayed in the ComboBox.
   </p>
-  <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxMustacheTemplate'"></example>
+  <example th:with="class='org.teamapps.documentation.example.templates.MustacheTemplateExample'"></example>
+  <h4 id="ComboBoxWithTemplate">ComboBox with Template</h4>
+  <p>
+    For general use of ComboBoxes, please refer to the section <a href="#Fields#ComboBoxFields">ComboBoxFields</a>
+    To display the records in a defined way, we use the BaseTemplate.LIST_ITEM_LARGE_ICON_TWO_LINES which has the
+    following list of property names: [icon, image, caption, description, badge, ariaLabel, title].
+  </p>
+  <example th:with="class='org.teamapps.documentation.example.templates.ComboboxWithTemplateExample'"></example>
+  <p style="color:red;">TODO: Make the following example simpler with TemplateField instead of ComboBox and move it to better
+    place</p>
   <h6 id="TemplateDecider">TemplateDecider</h6>
   <p>
     It is possible to set different templates for different records. For that purpose, you can set a general

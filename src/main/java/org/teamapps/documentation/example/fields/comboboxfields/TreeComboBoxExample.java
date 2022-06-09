@@ -1,7 +1,9 @@
-package org.teamapps.documentation.example.combobox;
+package org.teamapps.documentation.example.fields.comboboxfields;
 
 import org.teamapps.documentation.example.Example;
 import org.teamapps.documentation.example.SessionContext;
+import org.teamapps.documentation.example.combobox.Animal;
+import org.teamapps.documentation.example.combobox.AnimalSpecies;
 import org.teamapps.icon.emoji.EmojiIcon;
 import org.teamapps.ux.component.field.combobox.ComboBox;
 import org.teamapps.ux.component.tree.TreeNodeInfo;
@@ -10,7 +12,7 @@ import org.teamapps.ux.model.ComboBoxModel;
 
 import java.util.List;
 
-public class ComboBoxTree implements Example {
+public class TreeComboBoxExample implements Example {
     @Override
     public void onSessionStart(SessionContext sessionContext) {
         ComboBox<Animal> animalComboBox = new ComboBox<>();
