@@ -3,9 +3,8 @@ package org.teamapps.documentation.example.templates;
 import org.teamapps.common.format.Color;
 import org.teamapps.documentation.example.Example;
 import org.teamapps.documentation.example.SessionContext;
-import org.teamapps.documentation.example.combobox.Animal;
-import org.teamapps.documentation.example.combobox.AnimalSpecies;
-import org.teamapps.icon.antu.AntuIcon;
+import org.teamapps.documentation.example.data.Genus;
+import org.teamapps.documentation.example.data.Species;
 import org.teamapps.icon.emoji.EmojiIcon;
 import org.teamapps.icon.material.MaterialIcon;
 import org.teamapps.ux.component.field.Button;
@@ -20,16 +19,15 @@ public class ButtonWithTemplateExample implements Example {
         LinkButton link = new LinkButton("Quote", "https://i.redd.it/b0xof6rb13861.png");
         Button<BaseTemplateRecord> button1 = Button.create(MaterialIcon.MENU, "MENU", link).setColor(Color.PEACH_PUFF);
         sessionContext.addRootComponent(button1);
-        Animal record =  new Animal(EmojiIcon.LION, "Simba", AnimalSpecies.LION, 120, null, "Large carnivorous cat", Color.YELLOW);
-        Button<Animal> button2 = new Button<>(TOOLBAR_BUTTON, record);
-        button2.setPropertyExtractor(((animal, propertyName) -> {
-            switch (propertyName) {
-                case PROPERTY_ICON: return animal.getIcon();
-                case PROPERTY_DESCRIPTION: return animal.getDescription() + " size: " + animal.getHeightCentimeters() + " cm, color: yellow";
-                case PROPERTY_TITLE: return animal.getName();
-                case PROPERTY_CAPTION: return animal.getSpecies().toString();
-                default: return null;
-        }}));
+        Species record =  new Species(Genus.ANIMAL, EmojiIcon.LION, "Lion", 120, "Large carnivorous cat");
+        Button<Species> button2 = new Button<>(TOOLBAR_BUTTON, record);
+        button2.setPropertyExtractor(((animal, propertyName) -> switch (propertyName) {
+            case PROPERTY_ICON -> animal.getIcon();
+            case PROPERTY_DESCRIPTION -> animal.getDescription() + " size: " + animal.getMaxSizeCentimeters() + " cm, color: yellow";
+            case PROPERTY_TITLE -> animal.getName();
+            case PROPERTY_CAPTION -> animal.getName();
+            default -> null;
+        }));
         sessionContext.addRootComponent(button2);
     }
 }

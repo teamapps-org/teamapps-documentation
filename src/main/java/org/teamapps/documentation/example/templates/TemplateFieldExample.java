@@ -1,35 +1,26 @@
 package org.teamapps.documentation.example.templates;
 
-import org.teamapps.common.format.Color;
-import org.teamapps.data.extract.PropertyExtractor;
 import org.teamapps.documentation.example.Example;
 import org.teamapps.documentation.example.SessionContext;
-import org.teamapps.documentation.example.combobox.Animal;
-import org.teamapps.documentation.example.combobox.AnimalSpecies;
+import org.teamapps.documentation.example.data.Genus;
+import org.teamapps.documentation.example.data.Species;
 import org.teamapps.icon.emoji.EmojiIcon;
 import org.teamapps.ux.component.field.TemplateField;
 import org.teamapps.ux.component.template.BaseTemplate;
 
-import static org.teamapps.ux.component.template.BaseTemplate.*;
-import static org.teamapps.ux.component.template.BaseTemplate.PROPERTY_CAPTION;
+import java.util.Map;
+
 
 public class TemplateFieldExample implements Example {
-    @Override
-    public void onSessionStart(SessionContext sessionContext) {
-        Animal bearRecord = new Animal(EmojiIcon.BEAR, "Sonya", AnimalSpecies.BEAR, 150, null, "Carnivorous mammal", Color.BROWN);
-        TemplateField<Animal> templateField = new TemplateField(BaseTemplate.FILE_ITEM_FLOATING, bearRecord);
-        templateField.setPropertyExtractor(new PropertyExtractor<Animal>() {
-            @Override
-            public Object getValue(Animal animal, String propertyName) {
-                switch (propertyName) {
-                    case PROPERTY_ICON: return animal.getIcon();
-                    case PROPERTY_DESCRIPTION: return animal.getDescription();
-                    case PROPERTY_TITLE: return animal.getName();
-                    case PROPERTY_CAPTION: return animal.getSpecies().toString();
-                    default: return null;
-                }
-            }
-        });
-        sessionContext.addRootComponent(templateField);
-    }
+	@Override
+	public void onSessionStart(SessionContext sessionContext) {
+		Species bearRecord = new Species(Genus.ANIMAL, EmojiIcon.BEAR, "Bear");
+		TemplateField<Species> templateField = new TemplateField<>(BaseTemplate.TOOLBAR_BUTTON, bearRecord);
+		templateField.setPropertyProvider((species, propertyNames) -> Map.ofEntries(
+				Map.entry("icon", species.getIcon()),
+				Map.entry("caption", species.getName()),
+				Map.entry("description", species.getGenus())
+		));
+		sessionContext.addRootComponent(templateField);
+	}
 }

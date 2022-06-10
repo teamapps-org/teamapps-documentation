@@ -1,11 +1,12 @@
 package org.teamapps;
 
 import org.apache.commons.lang3.StringUtils;
-import org.teamapps.documentation.antlr.java9.Java9Parser;
+import org.teamapps.documentation.antlr.java.JavaParser;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import static org.teamapps.AstUtil.getFullText;
 import static org.teamapps.StringUtil.normalizeIndentation;
@@ -14,15 +15,15 @@ public class ExampleResolver {
 
 	public String getSourceCode(String exampleClassName) {
 		try {
-			Java9Parser parser = ParserUtil.createJava9arser(
+			JavaParser parser = ParserUtil.createJavaParser(
 					new InputStreamReader(getClass().getResourceAsStream("/" + exampleClassName.replace('.', '/') + ".java"), StandardCharsets.UTF_8));
-			Java9Parser.OrdinaryCompilationContext compilationContext = parser.ordinaryCompilation();
-			Java9Parser.NormalClassDeclarationContext classDecl = compilationContext.typeDeclaration().stream()
+			List<JavaParser.TypeDeclarationContext> typeDeclarations = parser.compilationUnit().typeDeclaration();
+			JavaParser.ClassBodyContext classBody = typeDeclarations.stream()
 					.filter(this::isPublicClass)
 					.findFirst()
-					.map(td -> td.classDeclaration().normalClassDeclaration()).orElse(null);
+					.map(td -> td.classDeclaration().classBody()).orElse(null);
 
-			String bodyText = getFullText(classDecl.classBody());
+			String bodyText = getFullText(classBody);
 			bodyText = bodyText.substring(1, bodyText.length() - 1);
 			return StringUtils.trim(normalizeIndentation(bodyText));
 		} catch (IOException e) {
@@ -30,10 +31,11 @@ public class ExampleResolver {
 		}
 	}
 
-	private boolean isPublicClass(Java9Parser.TypeDeclarationContext td) {
-		return td.classDeclaration() != null
-				&& td.classDeclaration().normalClassDeclaration() != null
-				&& td.classDeclaration().normalClassDeclaration().classModifier().stream().anyMatch(m -> m.PUBLIC() != null);
+	private boolean isPublicClass(JavaParser.TypeDeclarationContext td) {
+		if (td.classDeclaration() == null) {
+			return false;
+		}
+		return td.classOrInterfaceModifier().stream().anyMatch(m -> m.PUBLIC() != null);
 	}
 
 	public String escapeClassName(String exampleClassName) {

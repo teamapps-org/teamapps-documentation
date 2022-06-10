@@ -1,10 +1,9 @@
 package org.teamapps.documentation.example.templates;
 
-import org.teamapps.common.format.Color;
 import org.teamapps.documentation.example.Example;
 import org.teamapps.documentation.example.SessionContext;
-import org.teamapps.documentation.example.combobox.Animal;
-import org.teamapps.documentation.example.combobox.AnimalSpecies;
+import org.teamapps.documentation.example.data.Genus;
+import org.teamapps.documentation.example.data.Species;
 import org.teamapps.icon.emoji.EmojiIcon;
 import org.teamapps.ux.component.field.combobox.ComboBox;
 import org.teamapps.ux.component.template.BaseTemplate;
@@ -17,17 +16,17 @@ import static org.teamapps.ux.component.template.BaseTemplate.PROPERTY_CAPTION;
 public class ComboboxWithTemplateExample implements Example {
     @Override
     public void onSessionStart(SessionContext sessionContext) {
-        ComboBox<Animal> comboBox = ComboBox.createForList(List.of(
-                new Animal(EmojiIcon.ELEPHANT, "Benjamin", AnimalSpecies.ELEPHANT, 300, null, "Large grey herbivorous mammal", Color.GREY),
-                new Animal(EmojiIcon.RABBIT, "Judy" , AnimalSpecies.RABBIT, 20,  null, "Small furry mammal with long ears", Color.BEIGE),
-                new Animal(EmojiIcon.LION, "Simba", AnimalSpecies.LION, 120, null, "Large carnivorous cat", Color.YELLOW)));
+        ComboBox<Species> comboBox = ComboBox.createForList(List.of(
+                new Species(Genus.ANIMAL, EmojiIcon.ELEPHANT, "Elephant", 300, "Large grey herbivorous mammal"),
+                new Species(Genus.ANIMAL, EmojiIcon.RABBIT, "Rabbit" , 20, "Small furry mammal with long ears"),
+                new Species(Genus.ANIMAL, EmojiIcon.LION, "Lion", 120, "Large carnivorous cat")));
         comboBox.setTemplate(BaseTemplate.LIST_ITEM_LARGE_ICON_TWO_LINES);
-        comboBox.setPropertyExtractor((Animal animal, String propertyName) ->  {
+        comboBox.setPropertyExtractor((Species species, String propertyName) ->  {
             switch (propertyName) {
-                case PROPERTY_ICON: return animal.getIcon();
-                case PROPERTY_DESCRIPTION: return animal.getDescription();
-                case PROPERTY_TITLE: return animal.getName();
-                case PROPERTY_CAPTION: return animal.getSpecies().toString();
+                case PROPERTY_ICON: return species.getIcon();
+                case PROPERTY_DESCRIPTION: return species.getDescription();
+                case PROPERTY_TITLE: return species.getName();
+                case PROPERTY_CAPTION: return species.getName();
                 default: return null;
             }
         });

@@ -21,8 +21,8 @@ package org.teamapps;
 
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.misc.ParseCancellationException;
-import org.teamapps.documentation.antlr.java9.Java9Lexer;
-import org.teamapps.documentation.antlr.java9.Java9Parser;
+import org.teamapps.documentation.antlr.java.JavaLexer;
+import org.teamapps.documentation.antlr.java.JavaParser;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,10 +40,10 @@ public class ParserUtil {
 		return Arrays.asList(files);
 	}
 
-	public static Java9Parser createJava9arser(Reader reader) throws IOException {
-		Java9Lexer lexer = new Java9Lexer(CharStreams.fromReader(reader));
+	public static JavaParser createJavaParser(Reader reader) throws IOException {
+		JavaLexer lexer = new JavaLexer(CharStreams.fromReader(reader));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
-		Java9Parser parser = new Java9Parser(tokens);
+		JavaParser parser = new JavaParser(tokens);
 		parser.addErrorListener(new ThrowingErrorListener());
 		parser.setBuildParseTree(true);
 		return parser;

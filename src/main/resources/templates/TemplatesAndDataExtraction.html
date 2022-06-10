@@ -1,14 +1,62 @@
 <page>
-  <body>
-  <h3 id="TemplatesAndDataExtraction">Templates and Data Extraction</h3>
+    <body>
+    <h3 id="TemplatesAndDataExtraction">Templates and Data Extraction</h3>
 
-  <h4 id="GeneralConcept">General concept</h4>
-  <p>
-    This section shows how any kind of object can be displayed within TeamApps UI components in a custom way.
-    To achieve this, we use Templates and data extraction tools. In the below example, the general principle is applied
-    to the simplest component, the TemplateField, where we want to display an Animal object. <br>
-    Templates define how data properties are displayed on the UI. The set of properties a template is based on can be
-    accessed via the {getPropertyNames} method which every template must implement. Here, we use one of the predefined
+    <h4 id="GeneralConcept">General concept</h4>
+    <p>
+        TeamApps allows to display any kind of object in a custom way. In this context, we speak of <code>RECORD</code>s rather than objects.
+    </p>
+    <p>
+        To achieve this, TeamApps provides a templates and data extraction API.
+    </p>
+    <p>
+        In the following example, we display an animal object in a TemplateField. <br>
+    </p>
+
+    <example th:with="class='org.teamapps.documentation.example.templates.TemplateFieldExample'"></example>
+
+    <p>
+        <i>Templates</i> define how records are displayed on the UI. There are currently two <code>Template</code> interface implementations:
+    </p>
+
+    <table>
+        <tr>
+            <th><code>GridTemplate</code></th>
+            <td>Provides a high-level Java API for defining the visual appearance.</td>
+        </tr>
+        <tr>
+            <th><code>MustacheTemplate</code></th>
+            <td>Allows to define the appearance using HTML, with mustache placeholders.</td>
+        </tr>
+    </table>
+
+    <p>
+        All templates define placeholders (<i>properties</i>) that are filled with data. Every placeholder has a <code>propertyName</code>.
+        Properties are filled by extracting data from the records to be displayed.
+    </p>
+
+    <p>
+        The set of properties a template defines can be accessed using the <code>Template.getPropertyNames()</code> method.
+    </p>
+
+    <p>
+        TeamApps provides two APIs for extracting properties from records:
+    </p>
+
+    <table>
+        <tr>
+            <th><code>PropertyProvider</code></th>
+            <td>Functional interface <code>Map&lt;String, Object&gt; getValues(RECORD record, Collection&lt;String&gt; propertyNames);</code> returning all extracted properties at once.</td>
+        </tr>
+        <tr>
+            <th><code>PropertyExtractor</code></th>
+            <td>Functional interface <code>Object getValue(RECORD record, String propertyName);</code> extracting a single property by property name.</td>
+        </tr>
+    </table>
+
+    
+
+    Here, we use one of the predefined
     BaseTemplates which are based on the GridTemplate (see section <a href="#GridTemplate">Grid Template</a>).
     The BaseTemplate FILE_ITEM_FLOATING has the propertyNames: [icon, image, caption, description, badge,
     ariaLabel, title]. <br>
@@ -17,81 +65,81 @@
     Below, we implement a PropertyExtractor by defining this mapping in its {getValue} method. The PropertyProvider has
     a similar mapping function called {getValues} which returns a mapping of all propertyNames at once. <br>
     Note: in the example below, the title occurs in the mouseover popup.
-  </p>
-  <example th:with="class='org.teamapps.documentation.example.templates.TemplateFieldExample'"></example>
-  <p>
-    If no custom PropertyProvider or Extractor is set in a component, the BeanPropertyExtractor which implements the
-    PropertyExtractor is used as a default. Its {getValue} method is based on the ValueExtractor interface whose instances
-    are record class and propertyName specific. More precisely, its {extract} method returns the respective
-    propertyName specific value for a record. <br>
-    If there is no custom ValueExtractor for a given propertyName in a BeanPropertyExtractor instance, a
-    ValueExtractor is created for the class of the record and the propertyName if a getter named according to the
-    propertyName can be found within the class (and if fallbackToFields attribute is True, it also tries to match the
-    field names of the class). Thus, in the example, description and icon of the animal class would be displayed
-    automatically, since the attribute names match the propertyNames.
-    However, a template's propertyNames are not suitable as attribute names of the Objects that should be represented.
-    In that case, we can either define a custom PropertyProvider or extractor as in the previous example or alternatively
-    add custom ValueExtractors for specific propertyNames to the BeanPropertyExtractor via the {addProperty} method. In
-    the below example, we pass ValueExtractors for the caption, image and badge properties.
+    </p>
 
-  <p style="color:red;">TODO: Property Injection</p>
+    <p>
+        If no custom PropertyProvider or Extractor is set in a component, the BeanPropertyExtractor which implements the
+        PropertyExtractor is used as a default. Its {getValue} method is based on the ValueExtractor interface whose instances
+        are record class and propertyName specific. More precisely, its {extract} method returns the respective
+        propertyName specific value for a record. <br>
+        If there is no custom ValueExtractor for a given propertyName in a BeanPropertyExtractor instance, a
+        ValueExtractor is created for the class of the record and the propertyName if a getter named according to the
+        propertyName can be found within the class (and if fallbackToFields attribute is True, it also tries to match the
+        field names of the class). Thus, in the example, description and icon of the animal class would be displayed
+        automatically, since the attribute names match the propertyNames.
+        However, a template's propertyNames are not suitable as attribute names of the Objects that should be represented.
+        In that case, we can either define a custom PropertyProvider or extractor as in the previous example or alternatively
+        add custom ValueExtractors for specific propertyNames to the BeanPropertyExtractor via the {addProperty} method. In
+        the below example, we pass ValueExtractors for the caption, image and badge properties.
 
-  </p>
-  <example th:with="class='org.teamapps.documentation.example.templates.BeanPropertyExtractorExample'"></example>
-  <h4 id="GridTemplate">GridTemplate</h4>
-  <p>
-    TODO
-  </p>
-  <!--<example th:with="class='org.teamapps.documentation.example.templates.GridTemplateExample'"></example>-->
-  <p style="color:red;">TODO: Make the following example simpler with TemplateField instead of ComboBox</p>
-  <h6 id="MustacheTemplate">Mustache Template</h6>
-  <p>
-    The MustacheTemplate is instantiated with a html string that the property names are extracted from. This
-    is done by applying a regular expression that splits the html string at curly braces. In the below example,
-    the property names color, iconSize, icon and caption are thus extracted. At the same time, the html string
-    also defines the way the properties of the records are displayed in the ComboBox.
-  </p>
-  <example th:with="class='org.teamapps.documentation.example.templates.MustacheTemplateExample'"></example>
-  <h4 id="ComboBoxWithTemplate">ComboBox with Template</h4>
-  <p>
-    For general use of ComboBoxes, please refer to the section <a href="Fields#ComboBoxFields">ComboBoxFields</a>
-    To display the records in a defined way, we use the BaseTemplate.LIST_ITEM_LARGE_ICON_TWO_LINES which has the
-    following list of property names: [icon, image, caption, description, badge, ariaLabel, title].
-  </p>
-  <example th:with="class='org.teamapps.documentation.example.templates.ComboboxWithTemplateExample'"></example>
-  <p style="color:red;">TODO: Make the following example simpler with TemplateField instead of ComboBox and move it to better
-    place</p>
-  <h6 id="TemplateDecider">TemplateDecider</h6>
-  <p>
-    It is possible to set different templates for different records. For that purpose, you can set a general
-    TemplateDecider, but you can also further distinguish between the records in the drop-down list and the
-    record selected by the user which is demonstrated below.
-  </p>
-  <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxTemplateDecider'"></example>
-  <h4 id="ButtonWithTemplate">Button with Template</h4>
-  <p>
-    The main features to display on a button might be an icon and a caption. There are factory methods where you can
-    pass just (one of) these parameters and a BaseTemplateRecord will be created from them as the record entry of the
-    button and BaseTemplate called BUTTON will be used for display. We can also add a Component which expands upon
-    clicking the button. This is shown in the upper button example. <br>
-    Like in previously presented components, we can also display a custom record object on a button. For the arrangement
-    of the properties, we can for instance use one of the several button related predefined BaseTemplates and use set a
-    propertyProvider that maps selected information of the record onto the button (see second button example).
-    In a later section, we will see how to use buttons in a <a href="#ToolbarWithTemplate">toolbar with templates</a>.
-  </p>
-  <example th:with="class='org.teamapps.documentation.example.templates.ButtonWithTemplateExample'"></example>
-  <h4 id="ItemViewWithTemplate">ItemView with Template</h4>
-  <p>
-    An ItemView object contains a List of ItemGroups. Both have the same two generic Types, RECORD and a HEADERRECORD.
-    Accordingly, an ItemGroup object contains an items list of RECORDS and a headerRecord as attributes. The default
-    BaseTemplate of the groupHeader, the LIST_ITEM_SMALL_ICON_SINGLE_LINE, is set in the ItemView class  and the default
-    BaseTemplate of the items, the ITEM_VIEW_ITEM, is set in ItemGroup class.
-  </p>
-  <example th:with="class='org.teamapps.documentation.example.templates.ItemViewWithTemplateExample'"></example>
-  <h4 id="ToolbarWithTemplate">Toolbar with Template</h4>
-  <p>
-    TODO
-  </p>
-  <!--<example th:with="class='org.teamapps.documentation.example.templates.ToolbarWithTemplateExample'"></example>-->
-  </body>
+    <p style="color:red;">TODO: Property Injection</p>
+
+    </p>
+    <example th:with="class='org.teamapps.documentation.example.templates.BeanPropertyExtractorExample'"></example>
+    <h4 id="GridTemplate">GridTemplate</h4>
+    <p>
+        TODO
+    </p>
+    <!--<example th:with="class='org.teamapps.documentation.example.templates.GridTemplateExample'"></example>-->
+    <p style="color:red;">TODO: Make the following example simpler with TemplateField instead of ComboBox</p>
+    <h6 id="MustacheTemplate">Mustache Template</h6>
+    <p>
+        The MustacheTemplate is instantiated with a html string that the property names are extracted from. This
+        is done by applying a regular expression that splits the html string at curly braces. In the below example,
+        the property names color, iconSize, icon and caption are thus extracted. At the same time, the html string
+        also defines the way the properties of the records are displayed in the ComboBox.
+    </p>
+    <example th:with="class='org.teamapps.documentation.example.templates.MustacheTemplateExample'"></example>
+    <h4 id="ComboBoxWithTemplate">ComboBox with Template</h4>
+    <p>
+        For general use of ComboBoxes, please refer to the section <a href="Fields#ComboBoxFields">ComboBoxFields</a>
+        To display the records in a defined way, we use the BaseTemplate.LIST_ITEM_LARGE_ICON_TWO_LINES which has the
+        following list of property names: [icon, image, caption, description, badge, ariaLabel, title].
+    </p>
+    <example th:with="class='org.teamapps.documentation.example.templates.ComboboxWithTemplateExample'"></example>
+    <p style="color:red;">TODO: Make the following example simpler with TemplateField instead of ComboBox and move it to better
+        place</p>
+    <h6 id="TemplateDecider">TemplateDecider</h6>
+    <p>
+        It is possible to set different templates for different records. For that purpose, you can set a general
+        TemplateDecider, but you can also further distinguish between the records in the drop-down list and the
+        record selected by the user which is demonstrated below.
+    </p>
+    <example th:with="class='org.teamapps.documentation.example.combobox.ComboBoxTemplateDecider'"></example>
+    <h4 id="ButtonWithTemplate">Button with Template</h4>
+    <p>
+        The main features to display on a button might be an icon and a caption. There are factory methods where you can
+        pass just (one of) these parameters and a BaseTemplateRecord will be created from them as the record entry of the
+        button and BaseTemplate called BUTTON will be used for display. We can also add a Component which expands upon
+        clicking the button. This is shown in the upper button example. <br>
+        Like in previously presented components, we can also display a custom record object on a button. For the arrangement
+        of the properties, we can for instance use one of the several button related predefined BaseTemplates and use set a
+        propertyProvider that maps selected information of the record onto the button (see second button example).
+        In a later section, we will see how to use buttons in a <a href="#ToolbarWithTemplate">toolbar with templates</a>.
+    </p>
+    <example th:with="class='org.teamapps.documentation.example.templates.ButtonWithTemplateExample'"></example>
+    <h4 id="ItemViewWithTemplate">ItemView with Template</h4>
+    <p>
+        An ItemView object contains a List of ItemGroups. Both have the same two generic Types, RECORD and a HEADERRECORD.
+        Accordingly, an ItemGroup object contains an items list of RECORDS and a headerRecord as attributes. The default
+        BaseTemplate of the groupHeader, the LIST_ITEM_SMALL_ICON_SINGLE_LINE, is set in the ItemView class and the default
+        BaseTemplate of the items, the ITEM_VIEW_ITEM, is set in ItemGroup class.
+    </p>
+    <example th:with="class='org.teamapps.documentation.example.templates.ItemViewWithTemplateExample'"></example>
+    <h4 id="ToolbarWithTemplate">Toolbar with Template</h4>
+    <p>
+        TODO
+    </p>
+    <!--<example th:with="class='org.teamapps.documentation.example.templates.ToolbarWithTemplateExample'"></example>-->
+    </body>
 </page>

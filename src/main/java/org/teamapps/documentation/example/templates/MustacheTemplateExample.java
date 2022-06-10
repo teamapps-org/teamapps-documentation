@@ -4,40 +4,37 @@ import org.teamapps.common.format.Color;
 import org.teamapps.data.extract.PropertyExtractor;
 import org.teamapps.documentation.example.Example;
 import org.teamapps.documentation.example.SessionContext;
-import org.teamapps.documentation.example.combobox.Animal;
-import org.teamapps.documentation.example.combobox.AnimalSpecies;
+import org.teamapps.documentation.example.data.Genus;
+import org.teamapps.documentation.example.data.Species;
 import org.teamapps.icon.antu.AntuIcon;
 import org.teamapps.ux.component.field.combobox.ComboBox;
 import org.teamapps.ux.component.template.BaseTemplate;
+import org.teamapps.ux.component.template.htmltemplate.MustacheTemplate;
 
 import java.util.List;
 
 import static org.teamapps.ux.component.template.BaseTemplate.*;
-import static org.teamapps.ux.component.template.BaseTemplate.PROPERTY_CAPTION;
-import org.teamapps.ux.component.template.htmltemplate.MustacheTemplate;
 
 public class MustacheTemplateExample implements Example {
     @Override
     public void onSessionStart(SessionContext sessionContext) {
-        List<Animal> animalList = List.of(
-                new Animal(AntuIcon.APP_FIRESTORM_ICON_48, "Judy", AnimalSpecies.RABBIT, 20,
-                        null, "Small furry mammal with long ears", Color.BEIGE),
-                new Animal(AntuIcon.APP_NMAP_ICON_48, "Benjamin", AnimalSpecies.ELEPHANT, 300,
-                        null, "Large grey herbivorous mammal", Color.GREY));
-        ComboBox<Animal> animalComboBox = ComboBox.createForList(animalList);
+        List<Species> speciesList = List.of(
+                new Species(Genus.ANIMAL, AntuIcon.APP_FIRESTORM_ICON_48, "???", 20, "Small furry mammal with long ears"),
+                new Species(Genus.ANIMAL, AntuIcon.APP_NMAP_ICON_48, "???", 300, "Large grey herbivorous mammal"));
+        ComboBox<Species> animalComboBox = ComboBox.createForList(speciesList);
         animalComboBox.setTemplate(BaseTemplate.LIST_ITEM_LARGE_ICON_TWO_LINES);
-        animalComboBox.setPropertyExtractor(new PropertyExtractor<Animal>() {
+        animalComboBox.setPropertyExtractor(new PropertyExtractor<Species>() {
             @Override
-            public Object getValue(Animal animal, String propertyName) {
-                switch (propertyName) {
-                    case PROPERTY_ICON: return animal.getIcon();
-                    case PROPERTY_DESCRIPTION: return animal.getDescription();
-                    case PROPERTY_TITLE: return animal.getName();
-                    case PROPERTY_CAPTION: return animal.getSpecies().toString();
-                    case "color": return animal.getColor().toHtmlColorString();
-                    case "iconSize": return animal.getHeightCentimeters();
-                    default: return null;
-                }
+            public Object getValue(Species species, String propertyName) {
+                return switch (propertyName) {
+                    case PROPERTY_ICON -> species.getIcon();
+                    case PROPERTY_DESCRIPTION -> species.getDescription();
+                    case PROPERTY_TITLE -> species.getName();
+                    case PROPERTY_CAPTION -> species.getName();
+                    case "color" -> Color.RED;
+                    case "iconSize" -> species.getMaxSizeCentimeters();
+                    default -> null;
+                };
             }
         });
         MustacheTemplate template = new MustacheTemplate("" +

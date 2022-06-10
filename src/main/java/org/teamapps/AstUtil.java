@@ -21,55 +21,8 @@ package org.teamapps;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.Interval;
-import org.teamapps.documentation.antlr.java9.Java9Parser;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class AstUtil {
-
-	public static String getStringAnnotationValue(Java9Parser.NormalAnnotationContext annotation, String attributeName) {
-		Java9Parser.ElementValueContext annotationValue = getAnnotationValue(annotation, attributeName);
-		if (annotationValue != null) {
-			String title = annotationValue.getText();
-			return title.substring(1, title.length() - 1);
-		} else {
-			return null;
-		}
-	}
-
-	public static List<String> getStringArrayAnnotationValue(Java9Parser.NormalAnnotationContext annotation, String attributeName) {
-		Java9Parser.ElementValueContext annotationValue = getAnnotationValue(annotation, attributeName);
-		if (annotationValue != null) {
-			if (annotationValue.elementValueArrayInitializer() != null
-					&& annotationValue.elementValueArrayInitializer().elementValueList() != null) {
-				return annotationValue.elementValueArrayInitializer().elementValueList().elementValue().stream()
-						.map(ev -> ev.getText().substring(1, ev.getText().length() - 1))
-						.collect(Collectors.toList());
-			} else {
-				return Collections.singletonList(getStringAnnotationValue(annotation, attributeName));
-			}
-		} else {
-			return Collections.emptyList();
-		}
-	}
-
-	public static Boolean getBooleanAnnotationValue(Java9Parser.NormalAnnotationContext annotation, String attributeName, boolean defaultValue) {
-		Java9Parser.ElementValueContext value = getAnnotationValue(annotation, attributeName);
-		if (value != null) {
-			return Boolean.parseBoolean(value.getText());
-		} else {
-			return defaultValue;
-		}
-	}
-
-	public static Java9Parser.ElementValueContext getAnnotationValue(Java9Parser.NormalAnnotationContext annotation, String attributeName) {
-		return annotation.elementValuePairList().elementValuePair().stream()
-				.filter(elementValuePairContext -> elementValuePairContext.identifier().getText().equals(attributeName))
-				.map(elementValuePairContext -> elementValuePairContext.elementValue())
-				.findFirst().orElse(null);
-	}
 
 	public static String getFullText(ParserRuleContext context) {
 		if (context.getStart() == null || context.getStop() == null || context.getStart().getStartIndex() < 0 || context.getStop().getStopIndex() < 0) {
