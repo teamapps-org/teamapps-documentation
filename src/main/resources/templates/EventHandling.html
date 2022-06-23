@@ -4,6 +4,13 @@
     <h3>Events</h3>
 
     <p>Events are</p>
+    <p>
+        From SessionContext docstring to be considered:
+        When adding a listener to an {@link Event} from a thread that is bound to a session context, then by default,
+        the handling of the event will be performed within the same context without having to explicitly use the
+        {@link #runWithContext(Runnable)} method for the operations that the handler performs.
+        Events coming from the client are generally handled in a thread bound to the UI session.
+    </p>
 
     <p>Lorem ipsum dolor sit amet, consectetur <code>adipiscing</code> elit, sed do eiusmod tempor incididunt ut labore et dolore magna
         aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
