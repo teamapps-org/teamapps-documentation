@@ -7,20 +7,55 @@
         </p>
 
         <h4 id="SessionConcept">Session Concept</h4>
-        <p>
-            A UI session starts upon opening the website and ends when leaving or reloading it. <br>
-            In TeamApps, a UI session is represented by a SessionContext instance.
-        </p>
+
         <h4 id="SessionContext">Session Context</h4>
+
         <p>
-            The sessionContext instance in passed as an argument to the onSessionStart method. This is the only method
-            of the WebController interface. Every example in this whole documentation is thus a WebController
-            Implementation.<br>
-            The SessionContext provides access to several aspects of the UI session.
+            In TeamApps, a session is not related to an HTTP session. A TeamApps session starts when opening the website.
         </p>
-        <p style="color:grey;">(TODO: examples)</p>
         <p>
-            It also allows sending commands and updates to the client.
+            The end of a TeamApps session can be induced in several ways:
+        <ol>
+            <li>when the website is closed or reloaded or the internet connection is interrupted</li>
+            <li>when the session is destroyed on purpose from the server side</li>
+            <li>when commands sent from the server accumulate in the queue causing a CommandBufferOverflow. </li>
+            This can occur if the server sends the commands much faster than the client processes them or if the
+            connection to the client is interrupted while the server keeps queuing commands.
+            <li>when an uncaught exception occurs</li>
+        </ol>
+            When a session starts, the onSessionStart method of the WebController interface is called (side note: every
+            example in this documentation is a WebController implementation). The SessionContext argument of the
+            onSessionStart method represents a TeamApps session. <br>
+            Besides a Webcontroller, the embedded Server also gets a TeamAppsConfiguration argument. The
+            TeamAppsConfiguration includes settings that influence when a TeamApps session is ended:
+        <ul>
+            <li>
+                uiSessionTimeoutMillis:<br>
+                The Timeout after which the server considers a TeamApps session as obsolete and thus the session is closed.
+                This happens when the client stops sending keepalive messages or events. This may be caused by closing the website or by an
+                interruption in the internet connection.
+                TODO: write the rest of corresponding java doc what does not belong to general things that happen
+                when a session is closed.
+            </li>
+                keepaliveMessageIntervalMillis:<br>
+                The interval at which the client sends keepalive messages. This interval should be less than half of the
+                uiSessionTimeoutMillis.
+            <li>
+                commandBufferLength:<br>
+                The maximal <b>number of UI commands</b> for a client that are buffered on the server side before the
+                session is closed.
+            </li>
+            <li>
+                commandBufferTotalSize:<br>
+                The total <b>number of characters</b> that all commands in the command buffer of a session may hold maximally
+                before the session is closed.
+            </li>
+        </ul>
+        TODO: What happens when a session in closed
+
+        </p>
+        <p>
+            The SessionContext also allows sending commands and updates to the client.
             Client and Server communicate via websocket, so that both can send messages to the other any time. <br>
             Only one thread can interact with a UI session at a time. This is important for mainly two reasons:
             <ul>
@@ -72,5 +107,9 @@
             within the runWithContext method. If this was not done, we would get the mentioned error message.
         </p>
         <example th:with="class='org.teamapps.documentation.example.sessioncontext.SessionContextExample2'"></example>
+        <p>
+            The SessionContext provides access to several aspects of the UI session.
+        </p>
+        <p style="color:grey;">(TODO: examples)</p>
     </body>
 </page>
