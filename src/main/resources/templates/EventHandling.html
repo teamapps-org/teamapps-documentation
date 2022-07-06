@@ -1,42 +1,33 @@
 <page>
     <body>
-
     <h3>Events</h3>
-
-    <p>Events are</p>
     <p>
-        From SessionContext docstring to be considered:
-        When adding a listener to an {@link Event} from a thread that is bound to a session context, then by default,
-        the handling of the event will be performed within the same context without having to explicitly use the
-        {@link #runWithContext(Runnable)} method for the operations that the handler performs.
-        Events coming from the client are generally handled in a thread bound to the UI session.
+        Events objects contain an array of listeners of type Consumer. When an Event gets fired, it passes the event
+        data to every listener to perform the Consumer's operation. In the below example, we add a listener to the
+        onMessageTweeted event. The listener induces the showing of the event data, the Twitter message, as a
+        notification. The event gets fired at a fixed rate from the TwitterFeed constructor.
     </p>
-
-    <p>Lorem ipsum dolor sit amet, consectetur <code>adipiscing</code> elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-        dolor in reprehenderit in voluptate velit esse cillum dolore eu <code>fugiat</code> nulla pariatur. Excepteur sint occaecat
-        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-    <h4>Basic event registration</h4>
-
-    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
-        ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-        aspernatur aut odit aut fugit, sed quia <code>consequuntur</code> magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-
-    <example th:with="class='org.teamapps.documentation.example.MyExample'"></example>
-
-    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora
-        incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
-        suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
-        quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</p>
-
-    <div>
-        <example th:with="class='org.teamapps.documentation.example.MyExample2', height=300"></example>
-    </div>
+    <example th:with="class='org.teamapps.documentation.example.events.EventExample'"></example>
 
     <p>
-        asfa jfa lkdsa dsljfdslfj
+        There are several addListener methods. If a listener is added while the thread is bound to a
+        SessionContext A (so while CurrentSessionContext.getOrNull() is not null) the listener is bound to this
+        SessionContext A by default, i.e.:
+    <ul>
+        <li>When this event fires, the SessionContext-bound listener will get invoked while bound to the SessionContext
+            A, regardless of the SessionContext (or the lack of it) the event was fired in. To avoids having to use the
+            runWithContext method (see SessionHandling) within the implementation of every listener, a wrapper class
+            is used that runs the listener's operation within this method.</li>
+        <li>coming up</li>
+    </ul>
+    coming up
     </p>
+
+
+    <p>Events coming from the client are generally handled in a thread bound to the TeamApps session.</p>
+
+    <p>TODO: move below example elsewhere</p>
+    <example th:with="class='org.teamapps.documentation.example.MyExample2', height=300"></example>
 
     </body>
 </page>
