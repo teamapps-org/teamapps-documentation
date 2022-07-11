@@ -10,24 +10,24 @@
     <example th:with="class='org.teamapps.documentation.example.events.EventExample'"></example>
 
     <p>
-        There are several addListener methods. If a listener is added while the thread is bound to a
-        SessionContext A (so while CurrentSessionContext.getOrNull() is not null) the listener is bound to this
-        SessionContext A by default, i.e.:
+        There are several addListener methods. If a listener is added to an event while the thread is bound to a
+        SessionContext <b>A</b> (so while CurrentSessionContext.getOrNull() is not null) the listener is bound to this
+        SessionContext <b>A</b> by default, i.e.:
     <ul>
         <li>When this event fires, the SessionContext-bound listener will get invoked while bound to the SessionContext
-            A, regardless of the SessionContext (or the lack of it) the event was fired in. To avoids having to use the
+            <b>A</b>, regardless of the SessionContext (or the lack of it) the event was fired in. To avoid having to use the
             runWithContext method (see SessionHandling) within the implementation of every listener, a wrapper class
-            is used that runs the listener's operation within this method.</li>
-        <li>coming up</li>
+            is used that runs the listener's operation within the runWithContext method.</li>
+        <li>
+            When the SessionContext is destroyed (and thereby fires the SessionContext's onDestroyed event), the
+            listener is automatically detached from this event.
+        </li>
     </ul>
-    coming up
-    </p>
-
-
-    <p>Events coming from the client are generally handled in a thread bound to the TeamApps session.</p>
+    You can prevent a listener from being bound to the current SessionContext, by using one of the addListener method
+    with the bindToSessionContext parameter set to false.
+    <p>Events coming from the client are generally handled in a thread bound to that TeamApps session.</p>
 
     <p>TODO: move below example elsewhere</p>
     <example th:with="class='org.teamapps.documentation.example.MyExample2', height=300"></example>
-
     </body>
 </page>
